@@ -84,7 +84,7 @@ class RoundTest < Minitest::Test
 
     round.take_turn("Juneau")
     round.take_turn("Mars")
-
+# binding.pry
      assert_equal 1, round.number_correct_by_category(:STEM)
   end
 
