@@ -35,4 +35,7 @@ class Round
     correct
   end
 
+  def percent_correct
+    100 * self.number_correct.to_f/self.turns.length
+  end
 end
