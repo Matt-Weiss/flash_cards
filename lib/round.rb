@@ -31,11 +31,21 @@ class Round
     self.turns.each {|turn|
       if turn.correct? && turn.card.category == category
       correct +=1
-    end}
+      end}
     correct
   end
 
   def percent_correct
     100 * self.number_correct.to_f/self.turns.length
   end
+
+  def percent_correct_by_category(category)
+    category_total = 0
+    self.turns.each {|turn|
+      if turn.card.category == category
+      category_total +=1
+    end}
+    100 * self.number_correct_by_category(category).to_f/category_total
+  end
+
 end
