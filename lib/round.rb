@@ -20,10 +20,11 @@ class Round
 
   def number_correct
     self.turns.each {|turn|
-      if turn.guess == turn.card.answer
+      if turn.correct?
         @correct += 1
       end}
     @correct
   end
+
 
 end
