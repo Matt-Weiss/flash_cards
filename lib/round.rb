@@ -1,11 +1,10 @@
 class Round
   include Enumerable
-  attr_accessor :deck, :turns, :correct
+  attr_accessor :deck, :turns
 
   def initialize(deck)
     @deck = deck
     @turns = []
-    @correct = 0
   end
 
   def current_card
@@ -19,12 +18,21 @@ class Round
   end
 
   def number_correct
+    correct = 0
     self.turns.each {|turn|
       if turn.correct?
-        @correct += 1
+        correct += 1
       end}
-    @correct
+    correct
   end
 
+  def number_correct_by_category(category)
+    correct = 0
+    self.turns.each {|turn|
+      if turn.correct? && turn.card.category == category
+      correct +=1
+    end}
+    correct
+  end
 
 end
