@@ -53,6 +53,7 @@ class RoundTest < Minitest::Test
     guess = "Juneau"
 
     round.take_turn("Juneau")
+    #this isn't right. try to use "assert_equal true, round.turns.last.correct?"
     assert_equal  round.turns.last.guess, round.turns.last.card.answer
   end
 
@@ -120,5 +121,18 @@ class RoundTest < Minitest::Test
 
     assert_equal 50.0, round.percent_correct_by_category(:STEM)
     assert_equal 100.0, round.percent_correct_by_category(:Geography)
+  end
+
+  def test_round_start
+
+    card_1 = Card.new("What is the capital of Alaska?", "Juneau", :Geography)
+    card_2 = Card.new("The Viking spacecraft sent back to Earth photographs and reports about the surface of which planet?", "Mars", :STEM)
+    card_3 = Card.new("Describe in words the exact direction that is 697.5° clockwise from due north?", "North north west", :STEM)
+    cards = [card_1, card_2, card_3]
+    deck = Deck.new(cards)
+    round = Round.new(deck)
+
+    round.start
+    #I don't know how to assert a multi-line output but I wanted to see the result in a known workin environment first anyway.
   end
 end
