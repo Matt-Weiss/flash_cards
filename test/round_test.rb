@@ -53,8 +53,8 @@ class RoundTest < Minitest::Test
     guess = "Juneau"
 
     round.take_turn("Juneau")
-    #this isn't right. try to use "assert_equal true, round.turns.last.correct?"
-    assert_equal  round.turns.last.guess, round.turns.last.card.answer
+
+    assert round.turns.last.correct?
   end
 
   def test_it_can_count_correct_answers
@@ -133,6 +133,6 @@ class RoundTest < Minitest::Test
     round = Round.new(deck)
 
     round.start
-    #I don't know how to assert a multi-line output but I wanted to see the result in a known workin environment first anyway.
+    #I don't know how to assert a multi-line output but I wanted to see the result in a known working environment first anyway.
   end
 end
