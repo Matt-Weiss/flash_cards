@@ -36,7 +36,7 @@ class Round
   end
 
   def percent_correct
-    100 * self.number_correct.to_f/self.turns.length
+    (100 * self.number_correct.to_f/self.turns.length).round(2)
   end
 
   def percent_correct_by_category(category)
@@ -46,6 +46,12 @@ class Round
       category_total +=1
     end}
     100 * self.number_correct_by_category(category).to_f/category_total
+  end
+
+  def start
+    p "Welcome! You're playing with #{self.deck.cards.length} cards."
+    p "Questions from Trivial Pursuit Genus IV."
+    p "-" * 40
   end
 
 end
