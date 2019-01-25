@@ -7,11 +7,11 @@ class Turn
   end
 
   def correct?
-    @guess == card.answer
+    @guess.upcase == @card.answer.upcase
   end
 
   def feedback
-    if self.correct?
+    if correct?
       "Correct"
     else
       "Sorry, incorrect"

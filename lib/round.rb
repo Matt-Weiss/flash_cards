@@ -1,5 +1,5 @@
 class Round
-  include Enumerable
+  # include Enumerable
   attr_accessor :deck, :turns
 
   def initialize(deck)
@@ -12,6 +12,7 @@ class Round
   end
 
   def take_turn(guess)
+    #iterate over deck instead
     @turns << Turn.new(guess, @deck.cards.shift)
 
     return @turns.last

@@ -1,5 +1,5 @@
 class Deck
-  include Enumerable
+
   attr_accessor :cards
 
   def initialize(cards)
