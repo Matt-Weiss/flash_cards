@@ -132,6 +132,7 @@ class RoundTest < Minitest::Test
     round = Round.new(deck)
 
     round.start
+    round.return_category_and_percentage_correct
     #I don't know how to assert a multi-line output but I wanted to see the result in a known working environment first anyway.
   end
 end
