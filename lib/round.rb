@@ -1,5 +1,5 @@
 class Round
-  # include Enumerable
+
   attr_accessor :deck, :turns
 
   def initialize(deck)
@@ -8,12 +8,12 @@ class Round
   end
 
   def current_card
-    @deck.cards[0]
+    @deck.cards[turns.length]
   end
 
   def take_turn(guess)
-    #iterate over deck instead
-    @turns << Turn.new(guess, @deck.cards.shift)
+
+    @turns << Turn.new(guess, current_card)
 
     return @turns.last
   end
@@ -47,6 +47,12 @@ class Round
       category_total +=1
     end}
     100 * self.number_correct_by_category(category).to_f/category_total
+  end
+
+  def return_category_and_percentage_correct
+    deck.categories.each do |category|
+    puts "#{category}---#{percent_correct_by_category(category)}%"
+    end
   end
 
   def start

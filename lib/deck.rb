@@ -13,4 +13,8 @@ class Deck
   def cards_in_category(category)
     @cards.select{|card| card.category == category}
   end
+
+  def categories
+    (@cards.map{|card| card.category}).uniq
+  end
 end
