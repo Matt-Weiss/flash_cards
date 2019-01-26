@@ -26,3 +26,4 @@ end
 
 p "****** Game Over ******"
 p "You had #{round.number_correct} out of #{round.turns.length} correct for a total score of #{round.percent_correct}%."
+round.return
