@@ -122,7 +122,7 @@ class RoundTest < Minitest::Test
     assert_equal 100.0, round.percent_correct_by_category(:Geography)
   end
 
-  def test_round_start
+  def test_multi_line_outputs
 
     card_1 = Card.new("What is the capital of Alaska?", "Juneau", :Geography)
     card_2 = Card.new("The Viking spacecraft sent back to Earth photographs and reports about the surface of which planet?", "Mars", :STEM)
@@ -133,6 +133,7 @@ class RoundTest < Minitest::Test
 
     round.start
     round.return_category_and_percentage_correct
+    round.display_categories_with_index
     #I don't know how to assert a multi-line output but I wanted to see the result in a known working environment first anyway.
   end
 end
