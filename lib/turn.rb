@@ -14,7 +14,7 @@ class Turn
     if correct?
       "Correct"
     else
-      "Sorry, incorrect"
+      "Sorry, incorrect. The answer was #{@card.answer}"
     end
   end
 
