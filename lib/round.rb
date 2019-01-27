@@ -1,5 +1,5 @@
 class Round
-  attr_reader :deck, :turns
+  attr_reader :deck, :turns, :category_hash
 
   def initialize(deck)
     @deck = deck
@@ -12,7 +12,6 @@ class Round
 
   def take_turn(guess)
     @turns << Turn.new(guess, current_card)
-    return @turns.last
   end
 
   def number_correct
@@ -51,10 +50,57 @@ class Round
     puts "#{category}---#{percent_correct_by_category(category)}%"}
   end
 
-  def start
-    p "Welcome! You're playing with #{deck.count} cards."
-    p "Questions from Trivial Pursuit Genus IV."
-    p "-" * 40
+  def display_categories_with_index
+    @category_hash = {1 => :All}
+    deck.categories.each_with_index {|category, index|
+      category_hash[index+2] = category}
+    category_hash.each {|category|
+      puts "#{category[0]})  #{category[1]}"}
   end
 
+  def build_deck
+    category_selection = 0
+    puts "Welcome! Here are the categories available:"
+    display_categories_with_index
+    until category_hash.keys.include?(category_selection)
+      print "Please choose a category (1-#{@category_hash.length})"
+      category_selection = gets.chomp.to_i
+      if category_selection == 1
+        puts "You've selected all categories."
+      elsif
+        category_hash.keys.include?(category_selection)
+        @deck = Deck.new(@deck.cards.select{|card| card.category == category_hash[category_selection]})
+        puts "You've selected #{category_hash[category_selection]}"
+      else
+        puts "Invalid selection, please enter a number 1-#{@category_hash.length}"
+      end
+    end
+  end
+
+  def play
+    until turns.length == deck.count do
+      puts "\nThis is question #{turns.length+1} of #{deck.count}"
+      puts current_card.question
+      guess = gets.chomp
+      take_turn(guess)
+      puts "\n"
+      puts turns.last.feedback
+      puts "-" * 40
+      puts "\n"
+    end
+    puts "****** Game Over ******"
+    puts "You had #{number_correct} out of #{turns.length} correct for a total score of #{percent_correct}%."
+    puts "\n"
+    return_category_and_percentage_correct
+  end
+
+
+  def start
+    build_deck
+    puts "\nYou're playing with #{deck.count} cards."
+    puts "Questions from Trivial Pursuit Genus IV."
+    puts "-" * 43
+    play
+  end
+  
 end
